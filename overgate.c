@@ -1,3 +1,8 @@
+! /bin/sh
+EXE=`basename -s .c "$0"`
+tail -n +5 "$0" | cc -x c -o $EXE - && exec ./$EXE "$@"
+exit
+#include <arpa/inet.h>
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
@@ -22,7 +27,7 @@ exit(1);
   memset(&route, 0, sizeof(route));
   addr = (struct sockaddr_in*) &route.rt_gateway;
   addr->sin_family = AF_INET;
-  addr->sin_addr.s_addr = inet_addr("192.168.2.1");
+  addr->sin_addr.s_addr = inet_addr("192.168.43.2");
   addr = (struct sockaddr_in*) &route.rt_dst;
   addr->sin_family = AF_INET;
   addr->sin_addr.s_addr = INADDR_ANY;
